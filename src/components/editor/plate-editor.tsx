@@ -7,22 +7,38 @@ import { Plate, usePlateEditor } from 'platejs/react';
 
 import { EditorKit } from '@/components/editor/editor-kit';
 import { SettingsDialog } from '@/components/editor/settings-dialog';
+import { Button } from '@/components/ui/button';
 import { Editor, EditorContainer } from '@/components/ui/editor';
 
 export function PlateEditor() {
+  const [readOnly, setReadOnly] = React.useState(false);
+
   const editor = usePlateEditor({
     plugins: EditorKit,
     value,
   });
 
   return (
-    <Plate editor={editor}>
-      <EditorContainer>
-        <Editor variant="demo" />
-      </EditorContainer>
+    <div className="flex h-full flex-col gap-4">
+      <div className="flex items-center justify-between px-16 pt-4 sm:px-[max(64px,calc(50%-350px))]">
+        <h1 className="text-lg font-semibold">Plate Playground</h1>
+        <Button
+          onClick={() => setReadOnly(!readOnly)}
+          variant={readOnly ? 'default' : 'outline'}
+          size="sm"
+        >
+          {readOnly ? 'Edit Mode' : 'Read Only Mode'}
+        </Button>
+      </div>
 
-      <SettingsDialog />
-    </Plate>
+      <Plate editor={editor} readOnly={readOnly}>
+        <EditorContainer>
+          <Editor variant="demo" />
+        </EditorContainer>
+
+        <SettingsDialog />
+      </Plate>
+    </div>
   );
 }
 
