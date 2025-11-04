@@ -23,11 +23,11 @@ export function PlateEditor() {
       <div className="flex items-center justify-between px-16 pt-4 sm:px-[max(64px,calc(50%-350px))]">
         <h1 className="text-lg font-semibold">Plate Playground</h1>
         <Button
-          onClick={() => setReadOnly((prevReadOnly) => !prevReadOnly)}
+          onClick={() => setReadOnly(!readOnly)}
           variant={readOnly ? 'default' : 'outline'}
           size="sm"
         >
-          {readOnly ? 'Edit Mode' : 'Read Only Mode'}
+          {readOnly ? 'Switch to Edit Mode' : 'Switch to Read Only Mode'}
         </Button>
       </div>
 
